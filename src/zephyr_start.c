@@ -34,6 +34,8 @@
 #include <logging/log.h>
 LOG_MODULE_REGISTER(main);
 
+#define min(a, b) (((a) < (b)) ? (a) : (b))
+
 int real_main(void);
 int bg_main(char *src, size_t len);
 static const char splash[] = "Start background micropython process.\r\n";
