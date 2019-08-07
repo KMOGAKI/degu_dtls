@@ -23,6 +23,7 @@
  */
 #include <net/net_ip.h>
 #include <net/net_if.h>
+#include <net/net_linkaddr.h>
 extern char *net_byte_to_hex(char *ptr, u8_t byte, char base, bool pad);
 extern char *net_sprint_addr(sa_family_t af, const void *addr);
 
@@ -32,14 +33,42 @@ void get_eui64(char *eui64)
 	char *buf = eui64;
 	char byte;
 	int i;
+//	net_linkaddr net_laddr;
+	// "62842AA2347B3307";
 
-	iface = net_if_get_by_index(0);
+	iface = net_if_get_by_index(1);
 
-	for (i = 0; i < 8; i++) {
-		byte = (char)net_if_get_link_addr(iface)->addr[i];
-		buf = net_byte_to_hex(buf, byte, 'A', true);
-		(*buf)++;
-	}
+	byte = 0x62;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x84;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x2A;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0xA2;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x34;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x7B;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x33;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+	byte = 0x07;
+	buf = net_byte_to_hex(buf, byte, 'A', true);
+	(*buf)++;
+
+	// for (i = 0; i < 8; i++) {
+	// 	net_laddr = net_if_get_link_addr(iface);
+	// 	byte = (char)net_laddr->addr[i];
+	// 	buf = net_byte_to_hex(buf, byte, 'A', true);
+	// 	(*buf)++;
+	// }
 }
 
 char *get_gw_addr(unsigned int prefix)

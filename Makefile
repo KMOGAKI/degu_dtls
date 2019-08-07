@@ -44,6 +44,8 @@ SRC_C = main.c \
 	modzephyr.c \
 	modzsensor.c \
 	modmachine.c \
+	udp.c \
+	echo_client_s.c \
 	modzcoap.c \
 	machine_i2c.c \
 	machine_adc.c \
