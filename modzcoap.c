@@ -31,16 +31,10 @@ STATIC void parse_inet_addr(mp_obj_coap_t *coap, mp_obj_t addr_in, struct sockad
     struct sockaddr_in *sockaddr_in = (struct sockaddr_in*)sockaddr;
 
     mp_obj_t *addr_items;
-	mp_obj_get_array_fixed_n(addr_in, 2, &addr_items);
-	sockaddr_in->sin_family = net_context_get_family((void *)coap->sock);
-	//const char *objstr = mp_obj_str_get_str(addr_items[0]);
-	// sockaddr_in->sin_family = 43716;
-	//int itest = net_addr_pton(sockaddr_in->sin_family, objstr, &sockaddr_in->sin_addr);
-	int itest = net_addr_pton(sockaddr_in->sin_family, "fdf9:3dba:e602::1", &sockaddr_in->sin_addr);
-	RAISE_ERRNO(itest);
-	// RAISE_ERRNO(net_addr_pton(sockaddr_in->sin_family, mp_obj_str_get_str(addr_items[0]), &sockaddr_in->sin_addr));
+    mp_obj_get_array_fixed_n(addr_in, 2, &addr_items);
+    sockaddr_in->sin_family = net_context_get_family((void*)coap->sock);
+    RAISE_ERRNO(net_addr_pton(sockaddr_in->sin_family, mp_obj_str_get_str(addr_items[0]), &sockaddr_in->sin_addr));
     sockaddr_in->sin_port = htons(mp_obj_get_int(addr_items[1]));
-	printf("port = %u\n", sockaddr_in->sin_port);
 }
 
 STATIC mp_obj_t coap_client_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
