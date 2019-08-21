@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-git submodule update --init --recursive
+# git submodule update --init --recursive
 
 source ./env.sh
 make
